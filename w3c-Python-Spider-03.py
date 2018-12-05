@@ -155,12 +155,12 @@ str = selector01.xpath('string(//ul)')
 
 # 找到所有string之后，可以继续用遍历方法处理
 for item in str.split('\n'):
-    if item:
+    if item.strip():
         print(item.strip())
 
 
 # 列表推导式:
-print([item.strip() for item in str.split('\n') if item])
+print([item.strip() for item in str.split('\n') if item.strip()])
 
 
 
