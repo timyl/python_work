@@ -95,6 +95,75 @@ print(text_li4) # ['fourth item']
 
 
 
+# 练习-爬取360搜索导航栏
+print('-----------------------------------------')
+
+# 目标URL
+# www.so.com
+
+import requests
+from lxml import etree
+
+url = 'https://www.so.com'
+headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36'}
+response = requests.get(url, headers=headers)
+
+if response.status_code == requests.codes.ok:
+    print('请求成功')
+
+# 定义selector
+selector = etree.HTML(response.text)
+# 取元素
+# 1) 使用我们上边传统的方式xpath路径来取,结果是没问题的
+tra_path = selector.xpath('//body/div[2]/header/section/nav/a[1]/text()')[0]
+tra_path_href = selector.xpath('//body/div[2]/header/section/nav/a[1]/@href')[0]
+print(tra_path) # 360导航
+print(tra_path_href) # http://www.so.com/link?m=aQlkv%2BrmCbRODu%2BgRHnyuqF50H9Vyumk%2FW16hnzpUezyJrLA%2FgiDy0kYO9xZTQs3e
+
+# 还可以简洁：因为nav是唯一的（我们可以通过查看网页源代码搜索得知）
+tra_path_1 = selector.xpath('//*[@class="skin-text skin-text-tab"]/a[1]/text()')[0]
+print(tra_path_1) # 360导航
+
+
+# 2) 结合chrome浏览器的工具来取路径
+# 具体做法，就是找到具体地方，右键copy->到xpath即可
+chrome_xpath = selector.xpath('//*[@id="bd_tabnav"]/nav/a[2]/text()')[0]
+print(chrome_xpath) # 资讯
+
+chrome_xpath_nav = selector.xpath('//*[@id="bd_tabnav"]/nav/a/text()')
+print(chrome_xpath_nav) # ['360导航', '资讯', '视频', '图片', '良医', '地图', '百科', '英文', '更多']
+
+chrome_xpath_nav_href = selector.xpath('//*[@id="bd_tabnav"]/nav/a/@href')
+
+# 可以使用for循环来遍历
+for title, url in zip(chrome_xpath_nav, chrome_xpath_nav_href):
+    print(title, url)
+
+
+# 注意：以上的方式爬取不是万能的，因为对于一些动态生成的内容，例如JS生成的东西是不起作用的
+# 例如：上边的结果中，'更多 javascript:void(0)'
+
+
+print('--------------------------------')
+# xpath高级用法-----------------------------
+# 模糊匹配,以上边的htm为例
+selector01 = etree.HTML(htm)
+lis = selector01.xpath('//li[starts-with(@class, "item-")]/a/text()')
+print(lis) # ['first item', 'second item', 'third item', 'fourth item']
+
+str = selector01.xpath('string(//ul)')
+
+# 找到所有string之后，可以继续用遍历方法处理
+for item in str.split('\n'):
+    if item:
+        print(item.strip())
+
+
+# 列表推导式:
+print([item.strip() for item in str.split('\n') if item])
+
+
+
 
 
 
