@@ -62,6 +62,7 @@ sex = ['male', 'female', 'male']
 res = list(zip(name, height))
 print(res) # [('geng', 180), ('jean', 175), ('jack', 170)]
 
+
 # 注意：zip返回的是一个迭代器，并不会一次性生成，当每次迭代的时候才处理
 for name, value in zip(name, height):
     print('name is {}, age is {}'.format(name, value))

@@ -151,6 +151,7 @@ selector01 = etree.HTML(htm)
 lis = selector01.xpath('//li[starts-with(@class, "item-")]/a/text()')
 print(lis) # ['first item', 'second item', 'third item', 'fourth item']
 
+# string方法返回字符串
 str = selector01.xpath('string(//ul)')
 
 # 找到所有string之后，可以继续用遍历方法处理
