@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2018/12/5 22:17
 # @Author  : Geng zhi
-# @File    : w3c-Python-Spider-05.py
+# @File    : w3c-Python-Spider-05-Requests_Xpath爬取实例.py
 
 # 爬取网站
 
@@ -102,7 +102,7 @@ def parse_article(article_url):
 def download_img(img_url, title):
     # 用二进制保存
     img = requests.get(img_url, headers=headers).content
-    with open('./daqianduan_pic/' + title + ".jpg", 'wb') as f:
+    with open('./daqianduan_pic/' + title + '.jpg', 'wb') as f:
         f.write(img)
 
 # 主函数

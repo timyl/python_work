@@ -41,6 +41,13 @@ set_2.update('e')
 set_2.update(set_3)
 print(set_2)
 
+# 注意：
+# python 集合的添加有两种常用方法，分别是add和update。
+# 集合add方法：是把要传入的元素做为一个整个添加到集合中，例如：
+a = set()
+a.add('python')
+print(a)
+
 # python解释器注释：#和\，一行写不完，可以在结尾加\
 
 # if else

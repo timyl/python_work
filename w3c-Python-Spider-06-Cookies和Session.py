@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2018/12/6 19:39
 # @Author  : Geng zhi
-# @File    : w3c-Python-Spider-06.py
+# @File    : w3c-Python-Spider-06-Cookies和Session.py
 
 
 # 网站保持登陆的机制
